@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\QAController;
 use App\Http\Controllers\DisplayController;
+use App\Http\Controllers\MailerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,11 @@ Route::get('credits', function () {return view('credits');});
 Route::get('logout', [UserController::class, 'logout']);
 Route::get('profile', [UserController::class, 'displayuserdata']);
 Route::get('home', [DisplayController::class, 'display']);
-Route::get('{username}', [DisplayController::class, 'fetchuserprofile']);
+Route::get('/user/{username}', [DisplayController::class, 'fetchuserprofile']);
 Route::get('displayquestion/{qid}', [DisplayController::class, 'displayquestion']);
 Route::post('auth', [UserController::class, 'checkuserdetails']);
 Route::post('register', [UserController::class, 'adduserdetails']);
 Route::post('qsub', [QAController::class, 'qsub']);
 Route::post('asub/{qid}', [QAController::class, 'asub']);
+Route::get('forgotpassword', [UserController::class, 'forgotpassword']);
+Route::post('send-email', [MailerController::class, "composeEmail"]);
